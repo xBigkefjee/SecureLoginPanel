@@ -21,7 +21,7 @@ try{
     }
     $requested_name = stripslashes($requested_name);
     $requested_password = stripslashes($requested_password);
-    $requested_password = hash('sha512',$requestedpassword);
+    $requested_password = hash('sha512',$requested_password);
     mysqli_query($connectioninfo, "INSERT INTO users (`id`, `username`, `password`, `name`) VALUES (NULL, '".$requested_username."', '".$requested_password."', '".$requested_username."')");
     die('Registered user: '.$requested_name.'.|index.php');
 }
