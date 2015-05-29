@@ -14,9 +14,9 @@ $connectioninfo = mysqli_connect('localhost', 'db_username', 'db_password', 'db_
 $result = mysqli_query($connectioninfo, 'SELECT * FROM `users`');
 // for each returned row from the result
 foreach($result as $row){
-        // get variables out of result
-        $user = $row[username];
-        $pass = $row[password];
+    // get variables out of result
+    $user = $row[username];
+    $pass = $row[password];
 	// check if username is present in database
 	if($requested_username == $user){
 	  // hashing the user entered password
@@ -31,19 +31,11 @@ foreach($result as $row){
 			$_SESSION['useragent'] = hash('sha512',$_SERVER['HTTP_USER_AGENT']);
 			// close php script and redirect user
 			die('Logged in user: '.$user.', welcome '.$name.'.|index.php');
-		}else{
-			// log that user got denied at password
-			loglogin('Denied at password');
-		  // stop script
-			denied();	
 		}
-	}else{
-		// log that user got denied at username
-		loglogin('Denied at username');
-		// stop script
-		denied();
 	}
 }
+loglogin('Failed to log in successfully.');	
+denied();
 function loglogin($errormsg){
   // get variables of user
 	$current_useragent = $_SERVER['HTTP_USER_AGENT'];
